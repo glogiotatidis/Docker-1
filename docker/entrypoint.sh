@@ -85,10 +85,10 @@ initialize_system() {
   sed 's,{{REDIS_DATABASE}},'"${REDIS_DATABASE}"',g' -i /var/www/html/.env
   sed 's,{{REDIS_PORT}},'"${REDIS_PORT}"',g' -i /var/www/html/.env
 
-  php composer.phar install --no-dev -o
   php artisan key:generate
   php artisan app:install
   rm -rf bootstrap/cache/*
+  chmod -R 777 storage
   touch /.cachet-installed
   start_system
 }
