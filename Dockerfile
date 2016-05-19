@@ -30,7 +30,8 @@ RUN wget https://github.com/cachethq/Cachet/archive/v2.2.2.tar.gz && \
     tar xzvf v2.2.2.tar.gz --strip-components=1 && \
     chown -R www-data /var/www/html && \
     rm -r v2.2.2.tar.gz && \
-    php composer.phar install --no-dev -o
+    php composer.phar install --no-dev -o && \
+    rm -rf bootstrap/cache/*
 
 COPY docker/entrypoint.sh /sbin/entrypoint.sh
 COPY docker/.env.docker /var/www/html/.env
