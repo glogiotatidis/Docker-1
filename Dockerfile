@@ -9,6 +9,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     apt-get clean && \
     apt-get -q -y update && \
     apt-get -q -y install \
+    nginx \
     ca-certificates php5-fpm=5.* php5-curl php5-readline php5-mcrypt \
     php5-mysql php5-apcu php5-cli php5-gd php5-mysql php5-pgsql php5-sqlite \
     wget sqlite git libsqlite3-dev postgresql-client mysql-client curl supervisor cron unzip && \
@@ -34,6 +35,7 @@ RUN wget https://github.com/cachethq/Cachet/archive/master.tar.gz && \
 COPY docker/entrypoint.sh /sbin/entrypoint.sh
 COPY docker/.env.docker /var/www/html/.env
 COPY docker/crontab /etc/cron.d/artisan-schedule
+COPY docker/nginx-site.conf /nginx.conf
 
 RUN chmod 0644 /etc/cron.d/artisan-schedule &&\
     touch /var/log/cron.log &&\
